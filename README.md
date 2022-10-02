@@ -1,0 +1,2 @@
+- [Laravel8でe-Learningシステムを作成する](https://zenn.dev/misaka/books/dd643bac87284a)の学習
+- SpotifyAPIについてのアウトプット
