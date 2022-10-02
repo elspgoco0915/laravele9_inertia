@@ -1,0 +1,38 @@
+FROM php:8.0-apache
+
+COPY ./php/php.ini /usr/local/etc/php/
+COPY ./apache/*.conf /etc/apache2/sites-enabled/
+
+ENV TZ Asia/Tokyo
+RUN apt-get update \
+ && apt-get install -y zlib1g-dev libpq-dev mariadb-client zip unzip \
+ # PHP BCMath
+ && docker-php-ext-install bcmath \
+ # PHP GD
+ && apt-get install -y zlib1g-dev libpng-dev libjpeg62-turbo-dev \
+ && docker-php-ext-configure gd --with-jpeg \
+ && docker-php-ext-install -j$(nproc) gd \
+ # PHP ZIP
+ && apt-get install -y libzip-dev \
+ && docker-php-ext-install zip \
+ #
+ && docker-php-ext-install pdo_mysql mysqli \
+ && docker-php-ext-enable mysqli \
+ # mod_rewrite有効化
+ && a2enmod rewrite
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
+RUN composer global require "laravel/installer"
+
+--------
+22.5.24
+inertia.js 学習1
+https://blog.shipweb.jp/archives/540
+
+
+inertia.js 学習2
+https://zenn.dev/misaka/books/dd643bac87284a
