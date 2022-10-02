@@ -1,2 +1,1 @@
-- [Laravel8でe-Learningシステムを作成する](https://zenn.dev/misaka/books/dd643bac87284a)の学習
-- SpotifyAPIについてのアウトプット
+[Inertia.jsでシンプルにSPAを構築する　Inertia入門](https://blog.shipweb.jp/archives/398)の学習
